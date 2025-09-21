@@ -8,7 +8,7 @@ export default function Index() {
       style={styles.view}
     >
       <Text>Edit app/index.tsx to edit this screen.</Text>
-      <Link href="/login" style={}>Login Page</Link>
+      <Link href="/login" style={styles.navbutton}>Login Page</Link>
     </View>
   );
 }
@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
   },
 
   navbutton:{
+    width: 100,
+    height: 25,
+    backgroundColor:"coral",
+    borderRadius:8,
+    textAlign:"center",
     
   }
 })
