@@ -1,1 +1,6 @@
 import {Account, Client, Databases} from 'react-native-appwrite'
+const client = new Client().setEndpoint(process.env.EXPO_PUBLIC_APPWRITE_ENDPOIN!)
+.setProject(process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!)
+.setPlatform(process.env.EXPO_PUBLIC_APPWRITE_PLATFROM!)
+
+export const account = new Account(client)
