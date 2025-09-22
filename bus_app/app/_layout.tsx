@@ -9,14 +9,16 @@ function RouteGuard({children}:{children: React.ReactNode}){
     if(!isAuth){
       router.replace("/auth")
     }
-  })
+  });
   return<>{children}</>
 }
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{headerShown:false}}/>
-    </Stack>
+    <RouteGuard>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{headerShown:false}}/>
+      </Stack>
+    </RouteGuard>
   )
 }
