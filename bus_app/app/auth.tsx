@@ -18,6 +18,12 @@ export default function AuthScreen() {
             setError("Please fill all the fields.")
             return
         }
+        if(Password.length < 6) {
+            setError("Password should be at least 6 characters long")
+            return
+        }
+
+        setError(null)
     }
 
     const Theme =useTheme()
@@ -50,7 +56,7 @@ export default function AuthScreen() {
                     style = {styles.input}
                     onChangeText={setPassword}
                 />
-                {Error && <Text style={{color:red400}}>{Error}</Text>}
+                {Error && <Text style={{color:Theme.colors.error}}>{Error}</Text>}
 
                 <Button mode="contained"
                 style = {styles.button}
