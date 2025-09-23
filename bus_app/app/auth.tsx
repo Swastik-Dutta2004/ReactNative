@@ -2,6 +2,7 @@ import { KeyboardAvoidingView, Platform, View, StyleSheet } from "react-native";
 import { Button, Text, TextInput,useTheme } from 'react-native-paper'
 import { useState } from "react";
 import { red400 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+import { useAuth } from "@/lib/auth_context";
 
 export default function AuthScreen() {
     const [isSignUp, setisSignUp] = useState<boolean>(false)
@@ -28,6 +29,7 @@ export default function AuthScreen() {
 
     const Theme =useTheme()
 
+    const {signIn, signUp} = useAuth()
     return (
         <KeyboardAvoidingView
          behavior={Platform.OS === "ios" ? "padding" : "height"}
