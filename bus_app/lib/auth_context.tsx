@@ -1,32 +1,40 @@
-import React, { createContext } from "react";
-import { ID, Models } from "react-native-appwrite";
+import React, { useContext,createContext } from "react";
+import { ID } from "react-native-appwrite";
 import { account } from "./appwrite";
 
 type AuthContextType = {
-    user: Models.User<Models.Preferences> | null
-    signUp: (email: string, Password: string) => Promise<void>
-    signIn: (email: string, Password: string) => Promise<void>
+    // user: Models.User<Models.Preferences> | null
+    signUp: (email: string, password: string) => Promise<string | null>
+    signIn: (email: string, password: string) => Promise<string | null>
 }
 
-const AuthContext = createContext(undefined)
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const signUp = async(email: string, Password: string) => {
+    const signUp = async(email: string, password: string) => {
         try{
-            await account.create(ID.unique(), email, Password)
+            await account.create(ID.unique(), email, password)
+            return null
         }catch(error){
-
+            if(error instanceof Error){
+                return error.message
+            }
+            return "An error has occured in SignUp"
         }
     }
-    const signIn = async(email: string, Password: string) => {
+    const signIn = async(email: string, password: string) => {
         try{
-            await account.create(ID.unique(), email, Password)
+            await account.createEmailPasswordSession( email, password)
+            return null
         }catch(error){
-
+            if(error instanceof Error){
+                return error.message
+            }
+            return "An error has occured in SignIn"
         }
     }
     return (
-        <AuthContext.Provider value={{user, signUp, signIn}}>
+        <AuthContext.Provider value={{signIn, signUp}}>
             {children}
         </AuthContext.Provider>)
 }
